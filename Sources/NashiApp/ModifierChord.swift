@@ -33,7 +33,7 @@ enum WheelShortcut: String, CaseIterable, Identifiable {
     var title: String { switch self { case .conversions:return "Conversion wheel";case .tools:return "File tools wheel";case .actions:return "File actions wheel" } }
     var storageKey: String { switch self { case .conversions:return "conversionWheelDragModifierMask";case .tools:return "toolsWheelDragModifierMask";case .actions:return "actionsWheelDragModifierMask" } }
     var legacyKey: String { switch self { case .conversions:return "convertKey";case .tools:return "toolsKey";case .actions:return "actionsKey" } }
-    var defaultChord: ModifierChord { switch self { case .conversions:return .init(.shift);case .tools:return .init(.command);case .actions:return .init(.control) } }
+    var defaultChord: ModifierChord { switch self { case .conversions:return .init(.command);case .tools:return .init(.option);case .actions:return .init(.control) } }
 }
 
 enum ModifierPreferences {
