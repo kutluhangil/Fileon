@@ -5,6 +5,7 @@
 "%@ files, ready to go." = "%@ dosya hazır.";
 "%@ is enabled" = "%@ izni açık";
 "%@ items" = "%@ öğe";
+"%@ percent" = "yüzde %@";
 "%@ selected" = "%@ seçili";
 "%@ selected · Drag to carry files" = "%@ seçili · Dosyaları taşımak için sürükle";
 "%@ · Nashi" = "%@ · Nashi";
@@ -13,6 +14,7 @@
 "%lld files, ready to go." = "%lld dosya hazır.";
 "%lld is enabled" = "%lld izni açık";
 "%lld items" = "%lld öğe";
+"%lld percent" = "yüzde %lld";
 "%lld selected" = "%lld seçili";
 "%lld selected · Drag to carry files" = "%lld seçili · Dosyaları taşımak için sürükle";
 "%lld · Nashi" = "%lld · Nashi";
@@ -583,6 +585,7 @@
 "DEVICES" = "AYGITLAR";
 "DISCONNECT & FORGET TOKEN" = "BAĞLANTIYI KES VE TOKENI SİL";
 "DISMISS" = "KAPAT";
+"DISMISS ERROR" = "HATAYI KAPAT";
 "DOCUMENT XML IS TOO LARGE." = "BELGE XML'İ ÇOK BÜYÜK.";
 "DOCUMENTS" = "BELGELER";
 "DONE" = "BİTTİ";
@@ -647,6 +650,7 @@
 "Devices" = "Aygıtlar";
 "Disconnect & Forget Token" = "Bağlantıyı Kes ve Tokenı Sil";
 "Dismiss" = "Kapat";
+"Dismiss error" = "Hatayı kapat";
 "Document XML is too large." = "Belge XML'i çok büyük.";
 "Documents" = "Belgeler";
 "Done" = "Bitti";
@@ -943,6 +947,7 @@
 "IMAGE SIZE" = "GÖRSEL BOYUTU";
 "IMAGES" = "GÖRSELLER";
 "IMAGES, VIDEOS, DOCUMENTS, AND ALL THE LITTLE THINGS IN BETWEEN." = "GÖRSELLER, VİDEOLAR, BELGELER VE DİĞER TÜM DOSYALARIN.";
+"IN PROGRESS" = "SÜRÜYOR";
 "INK COLOR" = "KALEM RENGİ";
 "INPUT AND OUTPUT FORMAT." = "GİRDİ VE ÇIKTI BİÇİMİ.";
 "INPUT FORMAT" = "GİRDİ BİÇİMİ";
@@ -972,6 +977,7 @@
 "Image size" = "Görsel boyutu";
 "Images" = "Görseller";
 "Images, videos, documents, and all the little things in between." = "Görseller, videolar, belgeler ve diğer tüm dosyaların.";
+"In progress" = "Sürüyor";
 "Ink color" = "Kalem rengi";
 "Input and output format." = "Girdi ve çıktı biçimi.";
 "Input format" = "Girdi biçimi";
@@ -1367,6 +1373,7 @@
 "PROCESSED PREVIEW · EXPORT USES THE ORIGINAL FILE." = "İŞLENMİŞ ÖNİZLEME · DIŞA AKTARMADA ORİJİNAL DOSYA KULLANILIR.";
 "PROCESSED PREVIEW. CHOOSE ORIGINAL TO EDIT AREAS." = "İŞLENMİŞ ÖNİZLEME. ALANLARI DÜZENLEMEK İÇİN ORİJİNAL'İ SEÇ.";
 "PROCESSING…" = "İŞLENİYOR…";
+"PROGRESS" = "İLERLEME";
 "PROTECTED MEDIA CANNOT BE DOWNLOADED." = "KORUMALI MEDYA İNDİRİLEMEZ.";
 "PUBLIC UPDATES WORK WITHOUT A TOKEN." = "HERKESE AÇIK GÜNCELLEMELER İÇİN TOKEN GEREKMEZ.";
 "Padding" = "İç boşluk";
@@ -1423,6 +1430,7 @@
 "Processed preview · export uses the original file." = "İşlenmiş önizleme · dışa aktarmada orijinal dosya kullanılır.";
 "Processed preview. Choose Original to edit areas." = "İşlenmiş önizleme. Alanları düzenlemek için Orijinal'i seç.";
 "Processing…" = "İşleniyor…";
+"Progress" = "İlerleme";
 "Protected media cannot be downloaded." = "Korumalı medya indirilemez.";
 "Public updates work without a token." = "Herkese açık güncellemeler için token gerekmez.";
 "QUALITY" = "KALİTE";

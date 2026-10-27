@@ -1091,5 +1091,9 @@
   "Flies out of the screen toward you in 3D and sinks back into it when it closes.": "3B olarak ekranın derinliğinden sana doğru fırlar, kapanırken içine geri çekilir.",
   "Wheel preview": "Çark önizlemesi",
   "Hover the slices. Changes show here as you make them.": "Dilimlerin üzerinde gezin. Değişiklikler burada anında görünür.",
-  "Play animation": "Animasyonu oynat"
+  "Play animation": "Animasyonu oynat",
+  "Dismiss error": "Hatayı kapat",
+  "Progress": "İlerleme",
+  "In progress": "Sürüyor",
+  "{0} percent": "yüzde {0}"
 }

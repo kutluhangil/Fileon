@@ -5,7 +5,8 @@ import NashiCore
 @MainActor final class WheelSmoke:NSObject,NSApplicationDelegate {
     private let output:URL
     private var checks:[String]=[]
-    init(output:URL) { self.output=output }
+    /// Writes only inside a new `wheel-smoke-<id>` folder, so nothing already in `output` is touched.
+    init(output:URL) { self.output=output.appendingPathComponent("wheel-smoke-"+UUID().uuidString.prefix(8),isDirectory:true) }
     func applicationDidFinishLaunching(_ notification:Notification) {
         var failure:String?
         let defaults=UserDefaults.standard,saved=["appLanguage","conversionFanTheme","wheelScale"].map { ($0,defaults.object(forKey:$0)) }
@@ -17,11 +18,15 @@ import NashiCore
     }
     private func check(_ value:Bool,_ label:String)throws { guard value else { throw NSError(domain:"Nashi Wheel QA",code:1,userInfo:[NSLocalizedDescriptionKey:label]) };checks.append(label) }
     private func run()throws {
-        try FileManager.default.createDirectory(at:output,withIntermediateDirectories:true)
+        try FileManager.default.createDirectory(at:output.deletingLastPathComponent(),withIntermediateDirectories:true)
+        try FileManager.default.createDirectory(at:output,withIntermediateDirectories:false)
+        let scratch=FileManager.default.temporaryDirectory.appendingPathComponent("nashi-wheel-smoke-"+UUID().uuidString,isDirectory:true)
+        try FileManager.default.createDirectory(at:scratch,withIntermediateDirectories:true)
+        defer { try? FileManager.default.removeItem(at:scratch) }
         try checkMotion()
         try checkDust()
         let fixtures=try ["Tatil.heic","Sunum.pdf","Röportaj.mov","Teklif.docx"].map { name -> URL in
-            let url=output.appendingPathComponent(name);try Data().write(to:url);return url
+            let url=scratch.appendingPathComponent(name);try Data().write(to:url);return url
         }
         try checkLabels(fixtures)
         try render(fixtures[0])

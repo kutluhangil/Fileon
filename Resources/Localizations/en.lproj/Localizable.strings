@@ -5,6 +5,7 @@
 "%@ files, ready to go." = "%@ files, ready to go.";
 "%@ is enabled" = "%@ is enabled";
 "%@ items" = "%@ items";
+"%@ percent" = "%@ percent";
 "%@ selected" = "%@ selected";
 "%@ selected · Drag to carry files" = "%@ selected · Drag to carry files";
 "%@ · Nashi" = "%@ · Nashi";
@@ -13,6 +14,7 @@
 "%lld files, ready to go." = "%lld files, ready to go.";
 "%lld is enabled" = "%lld is enabled";
 "%lld items" = "%lld items";
+"%lld percent" = "%lld percent";
 "%lld selected" = "%lld selected";
 "%lld selected · Drag to carry files" = "%lld selected · Drag to carry files";
 "%lld · Nashi" = "%lld · Nashi";
@@ -583,6 +585,7 @@
 "DEVICES" = "DEVICES";
 "DISCONNECT & FORGET TOKEN" = "DISCONNECT & FORGET TOKEN";
 "DISMISS" = "DISMISS";
+"DISMISS ERROR" = "DISMISS ERROR";
 "DOCUMENT XML IS TOO LARGE." = "DOCUMENT XML IS TOO LARGE.";
 "DOCUMENTS" = "DOCUMENTS";
 "DONE" = "DONE";
@@ -647,6 +650,7 @@
 "Devices" = "Devices";
 "Disconnect & Forget Token" = "Disconnect & Forget Token";
 "Dismiss" = "Dismiss";
+"Dismiss error" = "Dismiss error";
 "Document XML is too large." = "Document XML is too large.";
 "Documents" = "Documents";
 "Done" = "Done";
@@ -943,6 +947,7 @@
 "IMAGE SIZE" = "IMAGE SIZE";
 "IMAGES" = "IMAGES";
 "IMAGES, VIDEOS, DOCUMENTS, AND ALL THE LITTLE THINGS IN BETWEEN." = "IMAGES, VIDEOS, DOCUMENTS, AND ALL THE LITTLE THINGS IN BETWEEN.";
+"IN PROGRESS" = "IN PROGRESS";
 "INK COLOR" = "INK COLOR";
 "INPUT AND OUTPUT FORMAT." = "INPUT AND OUTPUT FORMAT.";
 "INPUT FORMAT" = "INPUT FORMAT";
@@ -972,6 +977,7 @@
 "Image size" = "Image size";
 "Images" = "Images";
 "Images, videos, documents, and all the little things in between." = "Images, videos, documents, and all the little things in between.";
+"In progress" = "In progress";
 "Ink color" = "Ink color";
 "Input and output format." = "Input and output format.";
 "Input format" = "Input format";
@@ -1367,6 +1373,7 @@
 "PROCESSED PREVIEW · EXPORT USES THE ORIGINAL FILE." = "PROCESSED PREVIEW · EXPORT USES THE ORIGINAL FILE.";
 "PROCESSED PREVIEW. CHOOSE ORIGINAL TO EDIT AREAS." = "PROCESSED PREVIEW. CHOOSE ORIGINAL TO EDIT AREAS.";
 "PROCESSING…" = "PROCESSING…";
+"PROGRESS" = "PROGRESS";
 "PROTECTED MEDIA CANNOT BE DOWNLOADED." = "PROTECTED MEDIA CANNOT BE DOWNLOADED.";
 "PUBLIC UPDATES WORK WITHOUT A TOKEN." = "PUBLIC UPDATES WORK WITHOUT A TOKEN.";
 "Padding" = "Padding";
@@ -1423,6 +1430,7 @@
 "Processed preview · export uses the original file." = "Processed preview · export uses the original file.";
 "Processed preview. Choose Original to edit areas." = "Processed preview. Choose Original to edit areas.";
 "Processing…" = "Processing…";
+"Progress" = "Progress";
 "Protected media cannot be downloaded." = "Protected media cannot be downloaded.";
 "Public updates work without a token." = "Public updates work without a token.";
 "QUALITY" = "QUALITY";

@@ -308,6 +308,7 @@ final class WheelModeBar:NSView {
     private weak var stage:WheelStageView?
     var onFrame:((WheelMotion)->Void)?
     init(stage:WheelStageView) { self.stage=stage }
+    deinit { timer?.invalidate() }
     /// `style == nil` is the Reduce Motion fade.
     func run(_ kind:Kind,style:WheelAnimationStyle?,done:(()->Void)?=nil) {
         let duration:Double

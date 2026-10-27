@@ -151,8 +151,8 @@ private struct SoftProgressBar:View {
         }
         .frame(height:4).nashiAnimation(value:state.progress)
         .onAppear { glide=true }
-        .accessibilityElement().accessibilityLabel(state.progressIsDeterminate ? "Progress":"In progress")
-        .accessibilityValue(state.progressIsDeterminate ? "\(Int(state.progress*100)) percent":state.progressLabel)
+        .accessibilityElement().accessibilityLabel(L10n.text(state.progressIsDeterminate ? "Progress":"In progress"))
+        .accessibilityValue(state.progressIsDeterminate ? L10n.text("\(Int(state.progress*100)) percent"):L10n.text(state.progressLabel))
     }
 }
 
