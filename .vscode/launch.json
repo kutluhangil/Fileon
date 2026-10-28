@@ -1,0 +1,44 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:Fileon}",
+            "name": "Debug Nashi",
+            "target": "Nashi",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug Nashi"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:Fileon}",
+            "name": "Release Nashi",
+            "target": "Nashi",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release Nashi"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:Fileon}",
+            "name": "Debug nashi-cli",
+            "target": "nashi-cli",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug nashi-cli"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:Fileon}",
+            "name": "Release nashi-cli",
+            "target": "nashi-cli",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release nashi-cli"
+        }
+    ]
+}
