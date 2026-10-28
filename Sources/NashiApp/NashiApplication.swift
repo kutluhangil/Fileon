@@ -126,6 +126,7 @@ enum NashiApplication {
 
     func applicationDidFinishLaunching(_ notification:Notification) {
         NashiAppearance.apply()
+        ModifierPreferences.keepPreviousDefaults()
         UserDefaults.standard.register(defaults:["enabled":true,"reveal":true,"sound":true,"convertKey":"command","toolsKey":"option","actionsKey":"control","wheelScale":1.0,"wheelGlassStyle":"tinted","wheelGlassIntensity":0.5,"wheelAnimationStyle":"depth","windowManagementEnabled":true])
         let mainMenu=NSMenu();let appMenu=NSMenu()
         appMenu.addItem(withTitle:"Home",action:#selector(showHome),keyEquivalent:"1")

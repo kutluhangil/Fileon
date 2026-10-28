@@ -25,6 +25,7 @@ import NashiCore
         defer { try? FileManager.default.removeItem(at:scratch) }
         try checkMotion()
         try checkDust()
+        try checkShortcutMigration()
         let fixtures=try ["Tatil.heic","Sunum.pdf","Röportaj.mov","Teklif.docx"].map { name -> URL in
             let url=scratch.appendingPathComponent(name);try Data().write(to:url);return url
         }
@@ -46,6 +47,18 @@ import NashiCore
         try check(island.baseSize.map { $0.width>$0.height } == true && island.capsuleLabel>0.9,"Island opens from a file capsule")
         try check(WheelMotion.spring(0) == 0 && WheelMotion.spring(1) == 1 && WheelMotion.spring(0.22,0.42)>1,"Spring settles exactly and low damping overshoots")
         try check(WheelMotion.modeSwitch(progress:1,count:count).petals == rest.petals,"Mode switch ends at rest")
+    }
+    private func checkShortcutMigration()throws {
+        func chords(_ saved:[String:String])->[ModifierChord] {
+            let suite="nashi-wheel-smoke-"+UUID().uuidString,defaults=UserDefaults(suiteName:suite)!
+            defer { defaults.removePersistentDomain(forName:suite) }
+            saved.forEach { defaults.set($0.value,forKey:$0.key) }
+            ModifierPreferences.keepPreviousDefaults(defaults:defaults)
+            return WheelShortcut.allCases.map { ModifierPreferences.chord(for:$0,defaults:defaults) }
+        }
+        try check(chords([:]) == [.init(.command),.init(.option),.init(.control)],"New users get Command, Option, Control")
+        try check(chords(["toolsKey":"command"]) == [.init(.shift),.init(.command),.init(.control)],"Tools kept on Command moves conversions back to Shift")
+        try check(chords(["convertKey":"option"]) == [.init(.option),.init(.command),.init(.control)],"Conversions on Option keeps tools on Command")
     }
     private func checkDust()throws {
         let size=64,space=CGColorSpace(name:CGColorSpace.sRGB)!

@@ -142,7 +142,7 @@ final class WheelStageView:NSView {
         let fill=liquid || solid ? NSColor.clear.cgColor:wash.withAlphaComponent(tinted ? lerp(0.05,0.4,intensity):lerp(0,0.15,intensity)).cgColor
         let rim=NSColor.white.withAlphaComponent(liquid || solid ? 0:dark ? 0.16:0.7).cgColor
         for layer in [tint.layer,barTint.layer] { layer?.backgroundColor=fill;layer?.borderColor=rim;layer?.borderWidth=liquid || solid ? 0:1 }
-        barGlass.alphaValue=glassAlpha;barFrost.alphaValue=frostAlpha
+        base.alphaValue=glassAlpha;frost.alphaValue=frostAlpha;barGlass.alphaValue=glassAlpha;barFrost.alphaValue=frostAlpha
         for (index,ring) in rings.enumerated() {
             let i=CGFloat(index+1)
             ring.strokeColor=(dark ? NSColor(white:0.32-0.02*i,alpha:0.8):NSColor(white:0.8-0.035*i,alpha:0.65)).cgColor;ring.lineWidth=3*scale
