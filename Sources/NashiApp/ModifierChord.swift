@@ -51,12 +51,15 @@ enum ModifierPreferences {
         defaults.set(chord.title.lowercased().replacingOccurrences(of:" + ",with:"+"),forKey:wheel.legacyKey)
         return true
     }
-    /// Call before registering defaults: a wheel the user never set keeps its old chord
-    /// (Shift for conversions, Command for tools) when the new default clashes with one they did set.
+    /// Call before registering defaults. When the new defaults would clash with a chord the user set,
+    /// every wheel they never set returns to its old chord (Shift conversions, Command tools, Control actions).
+    /// `set` never allowed a clash, so the user's chords plus the old defaults are always clash-free.
     static func keepPreviousDefaults(defaults:UserDefaults = .standard) {
+        let chords=WheelShortcut.allCases.map { chord(for:$0,defaults:defaults) }
+        guard Set(chords).count<chords.count else { return }
+        // Conversions first: Shift is no wheel's new default, which frees Command for tools.
         for (wheel,previous) in [(WheelShortcut.conversions,ModifierChord(.shift)),(.tools,ModifierChord(.command))]
-        where defaults.object(forKey:wheel.storageKey) == nil && defaults.object(forKey:wheel.legacyKey) == nil
-            && WheelShortcut.allCases.contains(where:{$0 != wheel && chord(for:$0,defaults:defaults) == wheel.defaultChord}) {
+        where defaults.object(forKey:wheel.storageKey) == nil && defaults.object(forKey:wheel.legacyKey) == nil {
             set(previous,for:wheel,defaults:defaults)
         }
     }

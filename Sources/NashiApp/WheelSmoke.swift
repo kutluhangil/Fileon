@@ -81,7 +81,7 @@ import NashiCore
         try check(chords([:]) == [.init(.command),.init(.option),.init(.control)],"New users get Command, Option, Control")
         try check(chords(["toolsKey":"command"]) == [.init(.shift),.init(.command),.init(.control)],"Tools kept on Command moves conversions back to Shift")
         try check(chords(["convertKey":"option"]) == [.init(.option),.init(.command),.init(.control)],"Conversions on Option keeps tools on Command")
-    }
+        try check(chords(["actionsKey":"option"]) == [.init(.shift),.init(.command),.init(.option)],"Actions on Option keeps conversions on Shift and tools on Command")    }
     private func checkDust()throws {
         let size=64,space=CGColorSpace(name:CGColorSpace.sRGB)!
         guard let context=CGContext(data:nil,width:size,height:size,bitsPerComponent:8,bytesPerRow:size*4,space:space,bitmapInfo:CGImageAlphaInfo.premultipliedLast.rawValue) else { throw NSError(domain:"Nashi Wheel QA",code:2) }
