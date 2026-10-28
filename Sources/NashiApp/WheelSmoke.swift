@@ -1,7 +1,7 @@
 import AppKit
 import NashiCore
 
-/// `--wheel-smoke <dir>`: motion endpoints, Snap dust, glass label fit and PNG renders. No windows or input.
+/// `--wheel-smoke <dir>`: motion endpoints, Snap dust, glass label fit and PNG renders. No input; the only window is its own progress toast.
 @MainActor final class WheelSmoke:NSObject,NSApplicationDelegate {
     private let output:URL
     private var checks:[String]=[]
@@ -31,6 +31,28 @@ import NashiCore
         }
         try checkLabels(fixtures)
         try render(fixtures[0])
+        try checkProgressToast()
+    }
+    /// The real progress toast rendered in light/dark and EN/TR, plus the catalog text its VoiceOver label and value use.
+    /// State lives in a throwaway suite; SwiftUI builds no accessibility tree without an assistive client, so the text is checked at its source.
+    private func checkProgressToast()throws {
+        for (language,expected) in [("en",["Progress","In progress","40 percent"]),("tr",["İlerleme","Sürüyor","yüzde 40"])] {
+            try check([AppLocalization.text("Progress",language:language),AppLocalization.text("In progress",language:language),AppLocalization.text("40 percent",language:language)] == expected,"Progress VoiceOver text in \(language): "+expected.joined(separator:" / "))
+        }
+        let suite="nashi-wheel-smoke-"+UUID().uuidString,defaults=UserDefaults(suiteName:suite)!
+        defer { defaults.removePersistentDomain(forName:suite);NSApp.appearance=nil }
+        let state=AppState(defaults:defaults);state.working=true;state.progressIsDeterminate=true;state.progress=0.4
+        for language in ["en","tr"] { for dark in [false,true] {
+            UserDefaults.standard.set(language,forKey:"appLanguage");NSApp.appearance=NSAppearance(named:dark ? .darkAqua:.aqua)
+            let toast=ProgressToastController();toast.show(state:state)
+            defer { toast.dismiss() }
+            guard let content=toast.panel?.contentView else { throw NSError(domain:"Nashi Wheel QA",code:1,userInfo:[NSLocalizedDescriptionKey:"Progress toast did not open"]) }
+            RunLoop.main.run(until:Date().addingTimeInterval(0.6));content.layoutSubtreeIfNeeded()
+            let name="progress-\(language)-\(dark ? "dark":"light").png"
+            guard let rep=content.bitmapImageRepForCachingDisplay(in:content.bounds) else { throw NSError(domain:"Nashi Wheel QA",code:1,userInfo:[NSLocalizedDescriptionKey:"Progress toast could not render"]) }
+            content.cacheDisplay(in:content.bounds,to:rep);try rep.representation(using:.png,properties:[:])?.write(to:output.appendingPathComponent(name))
+            checks.append("Rendered \(name)")
+        } }
     }
     private func checkMotion()throws {
         let count=8,rest=WheelMotion.rest(count)
