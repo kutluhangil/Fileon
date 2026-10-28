@@ -109,6 +109,8 @@ struct UIAuditError:LocalizedError { let message:String;init(_ message:String){s
             let suite="Nashi.UIAudit."+UUID().uuidString;suites.insert(suite)
             guard let defaults=UserDefaults(suiteName:suite) else{throw UIAuditError("Isolated audit preferences could not be created")}
             var arguments=originalArguments;arguments["appLanguage"]=language;arguments["appAppearance"]=appearance;arguments["reduceAnimations"]=true;arguments["soundsAndHapticsEnabled"]=false;arguments["sound"]=false;arguments["reveal"]=false
+            // The wheel stage reads its Theme settings from the standard store; pin them so the user's choice never reaches a capture.
+            arguments["conversionFanTheme"]="glass";arguments["wheelGlassStyle"]="tinted";arguments["wheelGlassIntensity"]=0.5
             UserDefaults.standard.setVolatileDomain(arguments,forName:UserDefaults.argumentDomain)
             // Each UserDefaults instance caches its own volatile search domains.
             // Set both stores so NSArgumentDomain cannot mask this cell's suite.

@@ -13,7 +13,9 @@ import NashiCore
         do { try run() } catch { failure=String(describing:error) }
         for (key,value) in saved { defaults.set(value,forKey:key) }
         let report:[String:Any]=["passed":failure == nil,"checks":checks,"error":failure as Any? ?? NSNull()]
-        if let data=try? JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys]) { try? data.write(to:output.appendingPathComponent("wheel-smoke.json")) }
+        // A missing report must not look like a pass.
+        do { try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys]).write(to:output.appendingPathComponent("wheel-smoke.json")) }
+        catch { fputs("wheel-smoke.json could not be written: \(error)\n",stderr);failure=failure ?? String(describing:error) }
         exit(failure == nil ? 0:1)
     }
     private func check(_ value:Bool,_ label:String)throws { guard value else { throw NSError(domain:"Nashi Wheel QA",code:1,userInfo:[NSLocalizedDescriptionKey:label]) };checks.append(label) }
@@ -50,7 +52,7 @@ import NashiCore
             RunLoop.main.run(until:Date().addingTimeInterval(0.6));content.layoutSubtreeIfNeeded()
             let name="progress-\(language)-\(dark ? "dark":"light").png"
             guard let rep=content.bitmapImageRepForCachingDisplay(in:content.bounds) else { throw NSError(domain:"Nashi Wheel QA",code:1,userInfo:[NSLocalizedDescriptionKey:"Progress toast could not render"]) }
-            content.cacheDisplay(in:content.bounds,to:rep);try rep.representation(using:.png,properties:[:])?.write(to:output.appendingPathComponent(name))
+            content.cacheDisplay(in:content.bounds,to:rep);try writePNG(rep,name)
             checks.append("Rendered \(name)")
         } }
     }
@@ -170,7 +172,11 @@ import NashiCore
         NSGraphicsContext.saveGraphicsState();NSGraphicsContext.current=context
         view.effectiveAppearance.performAsCurrentDrawingAppearance(body)
         NSGraphicsContext.restoreGraphicsState()
-        if let name,let data=rep.representation(using:.png,properties:[:]) { try data.write(to:output.appendingPathComponent(name)) }
+        if let name { try writePNG(rep,name) }
+    }
+    private func writePNG(_ rep:NSBitmapImageRep,_ name:String)throws {
+        guard let data=rep.representation(using:.png,properties:[:]) else { throw NSError(domain:"Nashi Wheel QA",code:1,userInfo:[NSLocalizedDescriptionKey:"Could not encode \(name)"]) }
+        try data.write(to:output.appendingPathComponent(name))
     }
     private static func items(_ inputs:[URL],_ mode:WheelMode)->[WheelItem] {
         switch mode {
